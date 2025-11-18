@@ -300,13 +300,24 @@ Este projeto foi desenvolvido para fins educacionais como parte do Projeto Integ
 
 ---
 
-## 👨‍💻 Autor
+## 👨‍💻 Autores
 
 **Priscila Occhi**
 
-- GitHub: [@PriscilaOcchi](https://github.com/PriscilaOcchi)
-- LinkedIn: [Seu LinkedIn](https://linkedin.com/in/priscila-occhi)
+- GitHub: @PriscilaOcchi](https://github.com/PriscilaOcchi
+- LinkedIn: Seu LinkedIn](https://linkedin.com/in/priscila-occhi)
 
+**👨‍💻 Abiqueila de Souza**
+GitHub:@Abilafora
+LinkedIn: www.linkedin.com/in/abiqueila-souza
+
+**👨‍💻 Alexandre Serra**
+GitHub: @alexandreserra1
+LinkedIn: www.linkedin.com/in/alexandreapserra/
+
+**👨🏽‍💻 Mateus Teixeira** 
+GitHub: @MateusT11
+Linkedin: https://www.linkedin.com/in/mateus-teixeira/
 ---
 
 ## 🎓 Instituição de Ensino
