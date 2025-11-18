@@ -322,11 +322,16 @@ Este projeto foi desenvolvido para fins educacionais como parte do Projeto Integ
 - GitHub: @MateusT11](https://github.com/MateusT11
 - LinkedIn: Seu LinkedIn](https://linkedin.com/in/mateus-teixeira)
 
+**Pietra Cesário**
+
+- GitHub: @pietracesario](https://github.com/@pietracesario
+- LinkedIn: Seu LinkedIn](https://linkedin.com/in/pietra-viena)
+
 ---
 
 ## 🎓 Instituição de Ensino
 
-**[Nome da Instituição]**  
+**[Senac]**  
 Curso: Tecnologia em Análise e Desenvolvimento de Sistemas  
 Projeto Integrador - [Ano/Semestre]
 
