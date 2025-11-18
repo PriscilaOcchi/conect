@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Catador | ReciclaCONNECT</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body class="dashboard-page">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <i class="fas fa-recycle"></i>
+            <h2>ReciclaCONNECT</h2>
+            <button class="sidebar-toggle" onclick="toggleSidebar()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <div class="sidebar-user">
+            <div class="user-avatar">
+                <i class="fas fa-user-circle"></i>
+            </div>
+            <div class="user-info">
+                <h3 id="userName">Priscila Occhi</h3>
+                <span class="user-badge">Catador</span>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="dashboard-catador.html" class="nav-item active">
+                <i class="fas fa-home"></i>
+                <span>Início</span>
+            </a>
+            <a href="/mapa" class="nav-item">
+                <i class="fas fa-map-marked-alt"></i>
+                <span>Mapa de Oportunidades</span>
+            </a>
+            <a href="oportunidades.html" class="nav-item">
+                <i class="fas fa-briefcase"></i>
+                <span>Oportunidades</span>
+            </a>
+            <a href="mensagens.html" class="nav-item">
+                <i class="fas fa-comments"></i>
+                <span>Mensagens</span>
+                <span class="badge">3</span>
+            </a>
+            <a href="historico.html" class="nav-item">
+                <i class="fas fa-history"></i>
+                <span>Histórico</span>
+            </a>
+            <a href="educacao.html" class="nav-item">
+                <i class="fas fa-graduation-cap"></i>
+                <span>Área Educativa</span>
+            </a>
+            <a href="perfil.html" class="nav-item">
+                <i class="fas fa-user-cog"></i>
+                <span>Meu Perfil</span>
+            </a>
+            <a href="index.html" class="nav-item nav-logout">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Sair</span>
+            </a>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Top Bar -->
+        <header class="top-bar">
+            <button class="sidebar-toggle-mobile" onclick="toggleSidebar()">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Buscar oportunidades, materiais, empresas...">
+            </div>
+
+            <div class="top-bar-actions">
+                <button class="btn-icon" title="Notificações">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">5</span>
+                </button>
+                <button class="btn-icon" title="Ajuda">
+                    <i class="fas fa-question-circle"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Dashboard Content -->
+        <div class="dashboard-content">
+            <!-- Welcome Section -->
+            <div class="welcome-section">
+                <h1>Bem-vindo, Priscila! 👋</h1>
+                <p>Aqui está um resumo das suas atividades hoje</p>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>8</h3>
+                        <p>Transações Este Mês</p>
+                        <span class="stat-change positive">
+                            <i class="fas fa-arrow-up"></i> 12% vs mês anterior
+                        </span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>R$ 2.450</h3>
+                        <p>Receita Este Mês</p>
+                        <span class="stat-change positive">
+                            <i class="fas fa-arrow-up"></i> 18% vs mês anterior
+                        </span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                        <i class="fas fa-weight-hanging"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>850 kg</h3>
+                        <p>Material Coletado</p>
+                        <span class="stat-change positive">
+                            <i class="fas fa-arrow-up"></i> 25% vs mês anterior
+                        </span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>4.8</h3>
+                        <p>Avaliação Média</p>
+                        <span class="stat-change">
+                            <i class="fas fa-star"></i> 15 avaliações
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="section-header">
+                <h2>Ações Rápidas</h2>
+            </div>
+            <div class="quick-actions">
+                <a href="mapa.html" class="action-card">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <h3>Encontrar Empresas</h3>
+                    <p>Veja empresas próximas no mapa</p>
+                </a>
+                <a href="oportunidades.html" class="action-card">
+                    <i class="fas fa-briefcase"></i>
+                    <h3>Ver Oportunidades</h3>
+                    <p>12 novas oportunidades hoje</p>
+                </a>
+                <a href="mensagens.html" class="action-card">
+                    <i class="fas fa-comments"></i>
+                    <h3>Mensagens</h3>
+                    <p>3 mensagens não lidas</p>
+                </a>
+                <a href="educacao.html" class="action-card">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h3>Aprender</h3>
+                    <p>Novos conteúdos disponíveis</p>
+                </a>
+            </div>
+
+            <!-- Recent Opportunities -->
+            <div class="section-header">
+                <h2>Oportunidades Recentes</h2>
+                <a href="oportunidades.html" class="link-primary">Ver todas <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="opportunities-list">
+                <div class="opportunity-card">
+                    <div class="opportunity-header">
+                        <div class="company-logo">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <div class="company-info">
+                            <h3>EcoRecicla Ltda</h3>
+                            <p class="location"><i class="fas fa-map-marker-alt"></i> Vila Mariana, São Paulo</p>
+                        </div>
+                        <span class="badge badge-new">Novo</span>
+                    </div>
+                    <div class="opportunity-body">
+                        <h4>Procura-se: Plástico PET</h4>
+                        <p>Compramos plástico PET limpo e prensado. Preço: R$ 2,80/kg</p>
+                        <div class="opportunity-meta">
+                            <span><i class="fas fa-weight-hanging"></i> Mín: 100kg</span>
+                            <span><i class="fas fa-calendar"></i> Postado há 2 horas</span>
+                        </div>
+                    </div>
+                    <div class="opportunity-footer">
+                        <button class="btn btn-secondary btn-sm">
+                            <i class="fas fa-info-circle"></i> Ver Detalhes
+                        </button>
+                        <button class="btn btn-primary btn-sm">
+                            <i class="fas fa-paper-plane"></i> Entrar em Contato
+                        </button>
+                    </div>
+                </div>
+
+                <div class="opportunity-card">
+                    <div class="opportunity-header">
+                        <div class="company-logo">
+                            <i class="fas fa-industry"></i>
+                        </div>
+                        <div class="company-info">
+                            <h3>Reciclagem ABC</h3>
+                            <p class="location"><i class="fas fa-map-marker-alt"></i> Santo André</p>
+                        </div>
+                        <span class="badge badge-hot">Urgente</span>
+                    </div>
+                    <div class="opportunity-body">
+                        <h4>Compramos: Papelão</h4>
+                        <p>Compra imediata de papelão limpo. Bom preço. Preço: R$ 0,90/kg</p>
+                        <div class="opportunity-meta">
+                            <span><i class="fas fa-weight-hanging"></i> Mín: 200kg</span>
+                            <span><i class="fas fa-calendar"></i> Postado há 5 horas</span>
+                        </div>
+                    </div>
+                    <div class="opportunity-footer">
+                        <button class="btn btn-secondary btn-sm">
+                            <i class="fas fa-info-circle"></i> Ver Detalhes
+                        </button>
+                        <button class="btn btn-primary btn-sm">
+                            <i class="fas fa-paper-plane"></i> Entrar em Contato
+                        </button>
+                    </div>
+                </div>
+
+                <div class="opportunity-card">
+                    <div class="opportunity-header">
+                        <div class="company-logo">
+                            <i class="fas fa-recycle"></i>
+                        </div>
+                        <div class="company-info">
+                            <h3>MetalCoop</h3>
+                            <p class="location"><i class="fas fa-map-marker-alt"></i> Guarulhos</p>
+                        </div>
+                    </div>
+                    <div class="opportunity-body">
+                        <h4>Precisamos: Alumínio</h4>
+                        <p>Compramos latas de alumínio e sucata de alumínio. Preço: R$ 5,50/kg</p>
+                        <div class="opportunity-meta">
+                            <span><i class="fas fa-weight-hanging"></i> Mín: 50kg</span>
+                            <span><i class="fas fa-calendar"></i> Postado ontem</span>
+                        </div>
+                    </div>
+                    <div class="opportunity-footer">
+                        <button class="btn btn-secondary btn-sm">
+                            <i class="fas fa-info-circle"></i> Ver Detalhes
+                        </button>
+                        <button class="btn btn-primary btn-sm">
+                            <i class="fas fa-paper-plane"></i> Entrar em Contato
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Map Preview -->
+            <div class="section-header">
+                <h2>Mapa de Empresas Próximas</h2>
+                <a href="mapa.html" class="link-primary">Ver mapa completo <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="map-preview">
+                <div id="mapPreview" style="height: 400px; border-radius: 10px;"></div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="section-header">
+                <h2>Atividade Recente</h2>
+            </div>
+            <div class="activity-list">
+                <div class="activity-item">
+                    <div class="activity-icon" style="background: #43e97b;">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <div class="activity-content">
+                        <h4>Transação Concluída</h4>
+                        <p>Venda de 150kg de plástico PET para EcoRecicla</p>
+                        <span class="activity-time">Há 2 horas</span>
+                    </div>
+                    <div class="activity-value">+ R$ 420,00</div>
+                </div>
+
+                <div class="activity-item">
+                    <div class="activity-icon" style="background: #4facfe;">
+                        <i class="fas fa-comment"></i>
+                    </div>
+                    <div class="activity-content">
+                        <h4>Nova Mensagem</h4>
+                        <p>Reciclagem ABC respondeu sua proposta</p>
+                        <span class="activity-time">Há 4 horas</span>
+                    </div>
+                </div>
+
+                <div class="activity-item">
+                    <div class="activity-icon" style="background: #f093fb;">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="activity-content">
+                        <h4>Nova Avaliação</h4>
+                        <p>MetalCoop avaliou você com 5 estrelas</p>
+                        <span class="activity-time">Há 1 dia</span>
+                    </div>
+                </div>
+
+                <div class="activity-item">
+                    <div class="activity-icon" style="background: #667eea;">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <div class="activity-content">
+                        <h4>Nova Oportunidade</h4>
+                        <p>Nova empresa procurando papelão na sua região</p>
+                        <span class="activity-time">Há 1 dia</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

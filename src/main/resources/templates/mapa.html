@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa de Oportunidades | ReciclaCONNECT</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body class="dashboard-page">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <i class="fas fa-recycle"></i>
+            <h2>ReciclaCONNECT</h2>
+            <button class="sidebar-toggle" onclick="toggleSidebar()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <div class="sidebar-user">
+            <div class="user-avatar">
+                <i class="fas fa-user-circle"></i>
+            </div>
+            <div class="user-info">
+                <h3 id="userName">Priscila Occhi</h3>
+                <span class="user-badge">Catador</span>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="dashboard-catador" class="nav-item">
+                <i class="fas fa-home"></i>
+                <span>Início</span>
+            </a>
+            <a href="mapa.html" class="nav-item active">
+                <i class="fas fa-map-marked-alt"></i>
+                <span>Mapa de Oportunidades</span>
+            </a>
+            <a href="oportunidades.html" class="nav-item">
+                <i class="fas fa-briefcase"></i>
+                <span>Oportunidades</span>
+            </a>
+            <a href="mensagens.html" class="nav-item">
+                <i class="fas fa-comments"></i>
+                <span>Mensagens</span>
+                <span class="badge">3</span>
+            </a>
+            <a href="historico.html" class="nav-item">
+                <i class="fas fa-history"></i>
+                <span>Histórico</span>
+            </a>
+            <a href="educacao.html" class="nav-item">
+                <i class="fas fa-graduation-cap"></i>
+                <span>Área Educativa</span>
+            </a>
+            <a href="perfil.html" class="nav-item">
+                <i class="fas fa-user-cog"></i>
+                <span>Meu Perfil</span>
+            </a>
+            <a href="index.html" class="nav-item nav-logout">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Sair</span>
+            </a>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Top Bar -->
+        <header class="top-bar">
+            <button class="sidebar-toggle-mobile" onclick="toggleSidebar()">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <div class="page-title">
+                <h1><i class="fas fa-map-marked-alt"></i> Mapa de Oportunidades</h1>
+            </div>
+
+            <div class="top-bar-actions">
+                <button class="btn-icon" title="Notificações">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">5</span>
+                </button>
+                <button class="btn-icon" title="Ajuda">
+                    <i class="fas fa-question-circle"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Map Content -->
+        <div class="dashboard-content">
+            <!-- Map Filters -->
+            <div class="map-filters">
+                <div class="filter-group">
+                    <label><i class="fas fa-filter"></i> Filtrar por:</label>
+                    <div class="filter-options">
+                        <label class="checkbox-filter">
+                            <input type="checkbox" checked onchange="filterMap('empresa')">
+                            <span class="filter-badge" style="background: #667eea;">
+                                <i class="fas fa-building"></i> Empresas
+                            </span>
+                        </label>
+                        <label class="checkbox-filter">
+                            <input type="checkbox" checked onchange="filterMap('cooperativa')">
+                            <span class="filter-badge" style="background: #f093fb;">
+                                <i class="fas fa-users"></i> Cooperativas
+                            </span>
+                        </label>
+                        <label class="checkbox-filter">
+                            <input type="checkbox" checked onchange="filterMap('ponto')">
+                            <span class="filter-badge" style="background: #43e97b;">
+                                <i class="fas fa-map-marker-alt"></i> Pontos de Coleta
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <label><i class="fas fa-recycle"></i> Material:</label>
+                    <select id="materialFilter" onchange="filterByMaterial()">
+                        <option value="todos">Todos os materiais</option>
+                        <option value="papel">Papel/Papelão</option>
+                        <option value="plastico">Plástico</option>
+                        <option value="metal">Metal/Alumínio</option>
+                        <option value="vidro">Vidro</option>
+                        <option value="eletronico">Eletrônicos</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label><i class="fas fa-map-marker-alt"></i> Distância:</label>
+                    <select id="distanceFilter" onchange="filterByDistance()">
+                        <option value="all">Todas as distâncias</option>
+                        <option value="5">Até 5 km</option>
+                        <option value="10">Até 10 km</option>
+                        <option value="20">Até 20 km</option>
+                        <option value="50">Até 50 km</option>
+                    </select>
+                </div>
+
+                <button class="btn btn-primary" onclick="centerMap()">
+                    <i class="fas fa-location-arrow"></i> Minha Localização
+                </button>
+            </div>
+
+            <!-- Map Container -->
+            <div class="map-container">
+                <div id="mainMap" style="height: 600px;"></div>
+                
+                <!-- Map Legend -->
+                <div class="map-legend">
+                    <h4>Legenda</h4>
+                    <div class="legend-item">
+                        <div class="legend-icon" style="background: #667eea;">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <span>Empresa Compradora</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-icon" style="background: #f093fb;">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <span>Cooperativa</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-icon" style="background: #43e97b;">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <span>Ponto de Coleta</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-icon" style="background: #4facfe;">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <span>Você está aqui</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nearby Places List -->
+            <div class="section-header" style="margin-top: 30px;">
+                <h2>Locais Próximos</h2>
+                <span class="result-count">Mostrando 8 resultados</span>
+            </div>
+            
+            <div class="places-grid">
+                <!-- Empresa 1 -->
+                <div class="place-card" data-type="empresa">
+                    <div class="place-header">
+                        <div class="place-icon" style="background: #667eea;">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <span class="place-badge">Empresa</span>
+                    </div>
+                    <h3>EcoRecicla Ltda</h3>
+                    <p class="place-address">
+                        <i class="fas fa-map-marker-alt"></i> 
+                        Rua das Flores, 123 - Vila Mariana
+                    </p>
+                    <p class="place-distance">
+                        <i class="fas fa-route"></i> 2.5 km de você
+                    </p>
+                    <div class="place-materials">
+                        <span class="material-tag">Plástico</span>
+                        <span class="material-tag">Metal</span>
+                        <span class="material-tag">Papel</span>
+                    </div>
+                    <div class="place-actions">
+                        <button class="btn btn-secondary btn-sm" onclick="viewOnMap(-23.5880, -46.6320)">
+                            <i class="fas fa-map"></i> Ver no Mapa
+                        </button>
+                        <button class="btn btn-primary btn-sm">
+                            <i class="fas fa-phone"></i> Contato
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Cooperativa 1 -->
+                <div class="place-card" data-type="cooperativa">
+                    <div class="place-header">
+                        <div class="place-icon" style="background: #f093fb;">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <span class="place-badge">Cooperativa</span>
+                    </div>
+                    <h3>CoopRecicla ABC</h3>
+                    <p class="place-address">
+                        <i class="fas fa-map-marker-alt"></i> 
+                        Av. Industrial, 456 - Santo André
+                    </p>
+                    <p class="place-distance">
+                        <i class="fas fa-route"></i> 4.2 km de você
+                    </p>
+                    <div class="place-info">
+                        <span><i class="fas fa-users"></i> 25 catadores</span>
+                        <span><i class="fas fa-star"></i> 4.8</span>
+                    </div>
+                    <div class="place-actions">
+                        <button class="btn btn-secondary btn-sm" onclick="viewOnMap(-23.6680, -46.5350)">
+                            <i class="fas fa-map"></i> Ver no Mapa
+                        </button>
+                        <button class="btn btn-primary btn-sm">
+                            <i class="fas fa-phone"></i> Contato
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Ponto de Coleta 1 -->
+                <div class="place-card" data-type="ponto">
+                    <div class="place-header">
+                        <div class="place-icon" style="background: #43e97b;">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <span class="place-badge">Ponto de Coleta</span>
+                    </div>
+                    <h3>Ecoponto Mooca</h3>
+                    <p class="place-address">
+                        <i class="fas fa-map-marker-alt"></i> 
+                        Praça da Mooca, s/n - Mooca
+                    </p>
+                    <p class="place-distance">
+                        <i class="fas fa-route"></i> 1.8 km de você
+                    </p>
+                    <div class="place-info">
+                        <span><i class="fas fa-clock"></i> Seg-Sáb: 8h-17h</span>
+                    </div>
+                    <div class="place-actions">
+                        <button class="btn btn-secondary btn-sm" onclick="viewOnMap(-23.5980, -46.5980)">
+                            <i class="fas fa-map"></i> Ver no Mapa
+                        </button>
+                        <button class="btn btn-primary btn-sm">
+                            <i class="fas fa-info-circle"></i> Info
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Empresa 2 -->
+                <div class="place-card" data-type="empresa">
+                    <div class="place-header">
+                        <div class="place-icon" style="background: #667eea;">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <span class="place-badge">Empresa</span>
+                    </div>
+                    <h3>Reciclagem Paulista</h3>
+                    <p class="place-address">
+                        <i class="fas fa-map-marker-alt"></i> 
+                        R. dos Trabalhadores, 789 - Ipiranga
+                    </p>
+                    <p class="place-distance">
+                        <i class="fas fa-route"></i> 3.7 km de você
+                    </p>
+                    <div class="place-materials">
+                        <span class="material-tag">Papelão</span>
+                        <span class="material-tag">Vidro</span>
+                    </div>
+                    <div class="place-actions">
+                        <button class="btn btn-secondary btn-sm" onclick="viewOnMap(-23.5950, -46.6100)">
+                            <i class="fas fa-map"></i> Ver no Mapa
+                        </button>
+                        <button class="btn btn-primary btn-sm">
+                            <i class="fas fa-phone"></i> Contato
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Empresa 3 -->
+                <div class="place-card" data-type="empresa">
+                    <div class="place-header">
+                        <div class="place-icon" style="background: #667eea;">
+                            <i class="fas fa-industry"></i>
+                        </div>
+                        <span class="place-badge">Empresa</span>
+                    </div>
+                    <h3>MetalCoop</h3>
+                    <p class="place-address">
+                        <i class="fas fa-map-marker-alt"></i> 
+                        Av. das Nações, 1000 - Guarulhos
+                    </p>
+                    <p class="place-distance">
+                        <i class="fas fa-route"></i> 12.5 km de você
+                    </p>
+                    <div class="place-materials">
+                        <span class="material-tag">Alumínio</span>
+                        <span class="material-tag">Cobre</span>
+                        <span class="material-tag">Ferro</span>
+                    </div>
+                    <div class="place-actions">
+                        <button class="btn btn-secondary btn-sm" onclick="viewOnMap(-23.4630, -46.5330)">
+                            <i class="fas fa-map"></i> Ver no Mapa
+                        </button>
+                        <button class="btn btn-primary btn-sm">
+                            <i class="fas fa-phone"></i> Contato
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Ponto de Coleta 2 -->
+                <div class="place-card" data-type="ponto">
+                    <div class="place-header">
+                        <div class="place-icon" style="background: #43e97b;">
+                            <i class="fas fa-recycle"></i>
+                        </div>
+                        <span class="place-badge">Ponto de Coleta</span>
+                    </div>
+                    <h3>Ecoponto Tatuapé</h3>
+                    <p class="place-address">
+                        <i class="fas fa-map-marker-alt"></i> 
+                        Rua Tuiuti, 2500 - Tatuapé
+                    </p>
+                    <p class="place-distance">
+                        <i class="fas fa-route"></i> 5.3 km de você
+                    </p>
+                    <div class="place-info">
+                        <span><i class="fas fa-clock"></i> 24 horas</span>
+                    </div>
+                    <div class="place-actions">
+                        <button class="btn btn-secondary btn-sm" onclick="viewOnMap(-23.5450, -46.5750)">
+                            <i class="fas fa-map"></i> Ver no Mapa
+                        </button>
+                        <button class="btn btn-primary btn-sm">
+                            <i class="fas fa-info-circle"></i> Info
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Cooperativa 2 -->
+                <div class="place-card" data-type="cooperativa">
+                    <div class="place-header">
+                        <div class="place-icon" style="background: #f093fb;">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <span class="place-badge">Cooperativa</span>
+                    </div>
+                    <h3>Coop Reciclar</h3>
+                    <p class="place-address">
+                        <i class="fas fa-map-marker-alt"></i> 
+                        Rua da Cooperativa, 350 - São Caetano
+                    </p>
+                    <p class="place-distance">
+                        <i class="fas fa-route"></i> 8.1 km de você
+                    </p>
+                    <div class="place-info">
+                        <span><i class="fas fa-users"></i> 40 catadores</span>
+                        <span><i class="fas fa-star"></i> 4.9</span>
+                    </div>
+                    <div class="place-actions">
+                        <button class="btn btn-secondary btn-sm" onclick="viewOnMap(-23.6180, -46.5550)">
+                            <i class="fas fa-map"></i> Ver no Mapa
+                        </button>
+                        <button class="btn btn-primary btn-sm">
+                            <i class="fas fa-phone"></i> Contato
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Empresa 4 -->
+                <div class="place-card" data-type="empresa">
+                    <div class="place-header">
+                        <div class="place-icon" style="background: #667eea;">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <span class="place-badge">Empresa</span>
+                    </div>
+                    <h3>PlastiRecicla</h3>
+                    <p class="place-address">
+                        <i class="fas fa-map-marker-alt"></i> 
+                        Av. Paulista, 2500 - Cerqueira César
+                    </p>
+                    <p class="place-distance">
+                        <i class="fas fa-route"></i> 6.9 km de você
+                    </p>
+                    <div class="place-materials">
+                        <span class="material-tag">PET</span>
+                        <span class="material-tag">PEAD</span>
+                        <span class="material-tag">PVC</span>
+                    </div>
+                    <div class="place-actions">
+                        <button class="btn btn-secondary btn-sm" onclick="viewOnMap(-23.5505, -46.6333)">
+                            <i class="fas fa-map"></i> Ver no Mapa
+                        </button>
+                        <button class="btn btn-primary btn-sm">
+                            <i class="fas fa-phone"></i> Contato
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/map.js"></script>
+</body>
+</html>

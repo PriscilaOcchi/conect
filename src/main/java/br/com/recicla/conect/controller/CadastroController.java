@@ -31,6 +31,16 @@ public class CadastroController {
         
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping("/dashboard-catador")
+    public ModelAndView dashboardCatador(){
+        return new ModelAndView("dashboard-catador");
+    }
+
+    @GetMapping("/mapa")
+    public ModelAndView mapa(){
+        return new ModelAndView("mapa");
+    }
     
     
 }
