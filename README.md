@@ -333,7 +333,7 @@ Este projeto foi desenvolvido para fins educacionais como parte do Projeto Integ
 
 **[Senac]**  
 Curso: Tecnologia em Análise e Desenvolvimento de Sistemas  
-Projeto Integrador - [Ano/Semestre]
+Projeto Integrador - [2025]
 
 
 ---
