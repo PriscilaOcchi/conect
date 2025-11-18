@@ -307,17 +307,21 @@ Este projeto foi desenvolvido para fins educacionais como parte do Projeto Integ
 - GitHub: @PriscilaOcchi](https://github.com/PriscilaOcchi
 - LinkedIn: Seu LinkedIn](https://linkedin.com/in/priscila-occhi)
 
-**👨‍💻 Abiqueila de Souza**
-GitHub:@Abilafora
-LinkedIn: www.linkedin.com/in/abiqueila-souza
+**Abiqueila de Souza**
 
-**👨‍💻 Alexandre Serra**
-GitHub: @alexandreserra1
-LinkedIn: www.linkedin.com/in/alexandreapserra/
+- GitHub: @Abilafora](https://github.com/Abilafora
+- LinkedIn: Seu LinkedIn](https://linkedin.com/in/abiqueila-souza)
 
-**👨🏽‍💻 Mateus Teixeira** 
-GitHub: @MateusT11
-Linkedin: https://www.linkedin.com/in/mateus-teixeira/
+**Alexandre Serra**
+
+- GitHub: @alexandreserra1](https://github.com/alexandreserra1
+- LinkedIn: Seu LinkedIn](https://linkedin.com/in/alexandreapserra)
+
+**Mateus Teixeira**
+
+- GitHub: @MateusT11](https://github.com/MateusT11
+- LinkedIn: Seu LinkedIn](https://linkedin.com/in/mateus-teixeira)
+
 ---
 
 ## 🎓 Instituição de Ensino
