@@ -327,6 +327,11 @@ Este projeto foi desenvolvido para fins educacionais como parte do Projeto Integ
 - GitHub: @pietracesario](https://github.com/@pietracesario
 - LinkedIn: Seu LinkedIn](https://linkedin.com/in/pietra-viena)
 
+Raquel Chancé
+
+- GitHub: @raquelchh](https://github.com/raquelchh)
+- LinkedIn: Seu LinkedIn](www.linkedin.com/in/raquel-chancé)
+
 ---
 
 ## 🎓 Instituição de Ensino
